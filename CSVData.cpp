@@ -10,6 +10,7 @@
 #include <fstream>
 
 #include "CSVData.h"
+#include <iostream>
 
 using namespace std;
 
@@ -125,7 +126,7 @@ bool writeCSV(const string path, CSVData &data)
                 isFirstField = false;
 
             // Replaces double quotes character "\""" with string "\"\"""
-            size_t pos = 0;
+            size_t pos = 0;            
             while ((pos = field.find('"', pos)) != std::string::npos)
             {
                 field.replace(pos, 1, "\"\"");

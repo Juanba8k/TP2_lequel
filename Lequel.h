@@ -16,6 +16,9 @@
 
 #include "Text.h"
 
+//nombre del archivo con textos del lenguaje a perfilar 
+#define CORPUS_FILE "guarani.txt"
+
 // TrigramProfile: map of trigram -> frequency
 typedef std::map<std::string, float> TrigramProfile;
 
@@ -35,5 +38,8 @@ TrigramProfile buildTrigramProfile(const Text &text);
 void normalizeTrigramProfile(TrigramProfile &trigramProfile);
 float getCosineSimilarity(TrigramProfile &textProfile, TrigramProfile &languageProfile);
 std::string identifyLanguage(const Text &text, LanguageProfiles &languages);
+
+bool addLanguage(const std::string path);
+TrigramProfile buildLanguageProfile(Text corpus);
 
 #endif

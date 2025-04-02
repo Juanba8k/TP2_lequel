@@ -16,7 +16,7 @@
 
 using namespace std;
 
-const string LANGUAGECODE_NAMES_FILE = "resources/languagecode_names_es.csv";
+const string LANGUAGECODE_NAMES_FILE = "resources/languagecode_names_es.csv"; // languagecode_names_es.csv
 const string TRIGRAMS_PATH = "resources/trigrams/";
 
 /**
@@ -80,6 +80,13 @@ int main(int, char *[])
     map<string, string> languageCodeNames;
     LanguageProfiles languages;
 
+    #if defined(CORPUS_FILE)
+    if (addLanguage(CORPUS_FILE))
+        cout << "Perfil para el corpus generado exitosamente!" << endl;
+    else
+        cout << "No se pudo generar el perfil para el corpus." << endl;
+    #endif
+
     if (!loadLanguagesData(languageCodeNames, languages))
     {
         cout << "Could not load trigram data." << endl;
@@ -94,7 +101,8 @@ int main(int, char *[])
     SetTargetFPS(60);
 
     string languageCode = "---";
-
+    
+    
     while (!WindowShouldClose())
     {
         if (IsKeyPressed(KEY_V) &&
@@ -136,8 +144,10 @@ int main(int, char *[])
         string languageString;
         if (languageCode != "---")
         {
-            if (languageCodeNames.find(languageCode) != languageCodeNames.end())
-                languageString = languageCodeNames[languageCode];
+            //cout << languageCode << endl;
+            //cout << "[" << languageCode.substr(0,3) << "]" << endl;
+            if (languageCodeNames.find(languageCode.substr(0,3)) != languageCodeNames.end())
+                languageString = languageCodeNames[languageCode.substr(0,3)]+ " " + languageCode.substr(4);
             else
                 languageString = "Desconocido";
         }
